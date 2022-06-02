@@ -1,0 +1,30 @@
+// 연속적인 입출력 처리 시 콜백 처리도 연속적으로 작성해야 함
+// 함수 호출 중첩이 깊어지지 않도록 프로미스(Promice) 이용하기
+
+const fs = require('fs')
+
+// Promise를 반환하는 함수 정의
+function readFile_pr (fname) {
+    return new Promise((resolve) => {
+        fs.readFile(fname, 'utf-8', (err, s) => {
+            resolve(s)
+        })
+    })
+}
+
+// Promise를 사용할 때는 1) Promise 객체를 반환하는 함수를 만든다
+// 2) 비동기 처리가 완료되면 then() 메소드 내부에 작성한 함수가 실행됨
+
+// 차례대로 텍스트 파일 읽기
+readFile_pr('a.txt')
+.then((text) => {
+    console.log('a.txt를 읽어들였습니다', text)
+    return readFile_pr('b.txt')
+})
+.then((text) => {
+    console.log('b.txt를 읽어들였습니다', text)
+    return readFile_pr('c.txt')
+})
+.then((text) => {
+    console.log('c.txt를 읽어들였습니다', text)
+})
