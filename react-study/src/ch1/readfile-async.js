@@ -20,3 +20,6 @@ async function readAll () {
 }
 
 readAll()
+
+// 비동기 처리 실행을 대기하고 싶은 함수 호출할 때에는 await <함수이름> (<매개변수>) 라고 작성
+// await 를 사용하려면 함수를 async function 이라고 정의해야 함
